@@ -2,8 +2,8 @@
   #app
     main
       .message This is a hover effects demo, please view on desktop.
-      h1.page-title.title MY WORKS &nbsp;
-        span.slideshow__title__offset.title__offset
+      h1.page-title.title MY LAST &nbsp;
+        span.slideshow__title__offset.title__offset WORKS
 </template>
 <style lang="scss">
 @import "./style/_utils.scss";
