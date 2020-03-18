@@ -28,6 +28,7 @@ const mutations = {
       state.language = 'es'
       Vue.localStorage.set('language', 'es')
     }
+    Vue.$i18n.locale = state.language
   },
   TOGGLE_SOUND (state) {
     if (state.audio) {
