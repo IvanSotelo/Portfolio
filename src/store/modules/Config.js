@@ -4,7 +4,6 @@ Vue.use(VueLocalStorage)
 
 const state = {
   isMobile: window.innerWidth <= 768,
-  routeName: '',
   menuOpen: false,
   language: Vue.localStorage.get('language', 'es'),
   audio: Vue.localStorage.get('audio')
@@ -13,9 +12,6 @@ const state = {
 const mutations = {
   SET_MOBILE (state, mobile) {
     state.isMobile = mobile
-  },
-  SET_ROUTE_NAME (state, route) {
-    state.routeName = 'is-' + route
   },
   TOGGLE_MENU (state) {
     state.menuOpen = !state.menuOpen
@@ -50,9 +46,6 @@ const actions = {
   setMobile ({ commit }, mobile) {
     commit('SET_MOBILE', mobile)
   },
-  setRouteName ({ commit }, route) {
-    commit('SET_ROUTE_NAME', route)
-  },
   toggleMenu ({ commit }) {
     commit('TOGGLE_MENU')
   },
@@ -66,7 +59,6 @@ const actions = {
 
 const getters = {
   isMobile: state => state.isMobile,
-  routeName: state => state.routeName,
   menuOpen: state => state.menuOpen,
   language: state => state.language,
   audio: state => state.audio

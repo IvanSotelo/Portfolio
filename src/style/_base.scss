@@ -16,7 +16,7 @@
     --color-text3: #b9e6e3;
     --color-text4: #e1d0a1;
     --color-text5: #ccd3f6;
-    --color-bg1: #3f4849;
+    --color-bg1: #060606;
     --color-bg2: #493f46;
     --color-bg3: #2b3242;
     --color-bg4: #3b3232;
@@ -106,13 +106,6 @@ a:focus {
     }
 }
 
-.message {
-    background: var(--color-text);
-    color: var(--color-bg);
-    padding: 1rem;
-    text-align: center;
-}
-
 .frame {
     padding: 3rem 5vw;
     text-align: center;
@@ -193,9 +186,6 @@ a:focus {
 }
 
 @media screen and (min-width: 53em) {
-    .message {
-        display: none;
-    }
     .frame {
         position: fixed;
         text-align: left;
