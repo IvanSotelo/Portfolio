@@ -1,5 +1,7 @@
 <template lang="pug">
 header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
+  .logo-wrap
+    Link.ui-splash-in(text="Ivan")
   .ui-toggle.js--hover.side.no-events.ui-splash-in(@mouseover="onToggleEnter" @click="toggleMenu")
     .ui-toggle-in
       .ui-toggle-body
@@ -11,11 +13,15 @@ header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
 </template>
 
 <script>
+import Link from '@/components/Link'
 import { TimelineMax, Expo } from 'gsap'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Header',
+  components: {
+    Link
+  },
   data: () => ({
     mouseHover: false
   }),
@@ -57,6 +63,15 @@ export default {
 </script>
 
 <style lang="scss">
+.logo-wrap {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: fixed;
+  height: 17vh;
+  left: 40px;
+  display: flex;
+}
 .ui-toggle {
     cursor: pointer;
     width: 100px;
