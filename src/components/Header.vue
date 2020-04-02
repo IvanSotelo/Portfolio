@@ -14,13 +14,15 @@ header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
 
 <script>
 import Link from '@/components/Link'
+import Logo from '@/components/Logo'
 import { TimelineMax, Expo } from 'gsap'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Header',
   components: {
-    Link
+    Link,
+    Logo
   },
   data: () => ({
     mouseHover: false
@@ -71,9 +73,9 @@ export default {
   height: 17vh;
   left: 40px;
   display: flex;
+  stroke:#fff;
 }
 .ui-toggle {
-    cursor: pointer;
     width: 100px;
     height: 100px;
     right: 0;

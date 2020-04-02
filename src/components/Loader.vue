@@ -2,20 +2,27 @@
 div
   .preloader
     .loader-wrapper
-      p.loader-text--model Ivan Sotelo
+      p.loader-text--model
+        Logo(iheight="150px")
       .loader-text-outter
-        p.loader-text.loader-text--sizing Ivan Sotelo
+        p.loader-text.loader-text--sizing
+          Logo(iheight="150px")
         .loader-text-inner
-          p.loader-text.loader-text--mask Ivan Sotelo
+          p.loader-text.loader-text--mask
+            Logo(iheight="150px")
 </template>
 
 <script>
+import Logo from '@/components/Logo'
 import ImagePreloader from 'image-preloader'
 import { TweenLite, TimelineMax, TweenMax, Expo } from 'gsap'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Loader',
+  components: {
+    Logo
+  },
   data: () => ({
     images: [
       ''
@@ -118,7 +125,7 @@ export default {
       }
     }
       .loader-text--model {
-          color: #54535c;
+          stroke:#54535c;
           position: absolute;
       }
 
@@ -136,7 +143,8 @@ export default {
       }
 
       .loader-text--mask {
-          color: #fff;
+          color: var(--color-text);
+          stroke:#fff;
       }
 
       .loader-text--sizing {

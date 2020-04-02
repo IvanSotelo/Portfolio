@@ -11,7 +11,7 @@
 }
 
 :root {
-    --color-text1: #deedcf;
+    --color-text1: #ffffff;
     --color-text2: #ffcbcc;
     --color-text3: #b9e6e3;
     --color-text4: #e1d0a1;
@@ -50,7 +50,8 @@ body {
 	text-size-adjust: 100%;
 	color: var(--color-text);
 	background-color: var(--color-bg);
-	transition: background-color 0.5s;
+    transition: background-color 0.5s;
+    cursor: none;
 }
 
 /* Page Loader */
