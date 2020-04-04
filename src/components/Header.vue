@@ -1,8 +1,11 @@
 <template lang="pug">
 header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
-  .logo-wrap
-    Link.ui-splash-in(text="Ivan")
-  .ui-toggle.js--hover.side.no-events.ui-splash-in(@mouseover="onToggleEnter" @click="toggleMenu")
+  .logo-wrap(data-link)
+    Link.ui-splash-in(text="Ivan Sotelo")
+  router-link.ui-splash-in.logo-icon(to="/")
+    .in
+      Logo.logo(iheight="30px")
+  .ui-toggle.js--hover.side.no-events.ui-splash-in(@mouseover="onToggleEnter" @click="toggleMenu" data-link)
     .ui-toggle-in
       .ui-toggle-body
         .in
@@ -65,6 +68,10 @@ export default {
 </script>
 
 <style lang="scss">
+header {
+  position: absolute;
+  z-index: 100;
+}
 .logo-wrap {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -73,7 +80,52 @@ export default {
   height: 17vh;
   left: 40px;
   display: flex;
+}
+.logo-icon {
+  position: fixed;
   stroke:#fff;
+  pointer-events: all;
+  -webkit-transform: translate(0);
+  transform: translate(0);
+  width: 17vh;
+  height: 17vh;
+  top: 0;
+  left: 50%;
+  margin-left: -8.5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  opacity: 1;
+  .logo {
+    top: 50%;
+    left: 50%;
+    -webkit-transition: all .82s cubic-bezier(.44,.15,.2,1)!important;
+      transition: all .82s cubic-bezier(.44,.15,.2,1)!important;
+    -webkit-transform: translate(-50%,-50%) scale(1.4);
+    transform: translate(-50%,-50%) scale(1.4);
+    position: absolute;
+    margin-top: -1px;
+    &:hover {
+      -webkit-transform: translate(-50%,-50%) scale(1.6);
+      transform: translate(-50%,-50%) scale(1.6);
+    }
+  }
+  @media (max-width: 900px) and (orientation: landscape), screen and (max-width: 640px) {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+  }
 }
 .ui-toggle {
     width: 100px;

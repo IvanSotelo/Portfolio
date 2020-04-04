@@ -1,5 +1,5 @@
 <template lang="pug">
-router-link(to="/")
+router-link(to="/" data-link)
   span.flip-a
     span.t
       span.f

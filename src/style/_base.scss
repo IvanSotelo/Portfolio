@@ -1,13 +1,14 @@
 *,
 *::after,
 *::before {
-    	margin: 0;
-      padding: 0;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      outline: none;
-      text-transform: none;
-      text-decoration: none;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    text-transform: none;
+    text-decoration: none;
+    cursor: none;
 }
 
 :root {
@@ -51,7 +52,6 @@ body {
 	color: var(--color-text);
 	background-color: var(--color-bg);
     transition: background-color 0.5s;
-    cursor: none;
 }
 
 /* Page Loader */
