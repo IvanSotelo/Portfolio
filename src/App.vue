@@ -4,12 +4,13 @@
     app-cursor(v-if="!isMobile")
     Loader(v-if="isLoading")
     router-view(v-else)
-    .site-footer.ui-splash-in
+    Footer
 </template>
 
 <script>
 import Loader from '@/components/Loader'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import AppCursor from '@/components/AppCursor'
 import { mapGetters } from 'vuex'
 
@@ -18,6 +19,7 @@ export default {
   components: {
     Loader,
     Header,
+    Footer,
     AppCursor
   },
   computed: {
@@ -44,10 +46,16 @@ body {
 }
 
 .is-loaded {
-  .ui-splash-in {
+  .ui-splash-in, .progress-f{
     -webkit-transition: opacity .82s cubic-bezier(.4,.22,.21,1.04);
     transition: opacity .82s cubic-bezier(.4,.22,.21,1.04);
     opacity: 1;
+  }
+  .site-mask {
+    opacity: .85;
+  }
+  .progress-b {
+    opacity: .15;
   }
 }
 
