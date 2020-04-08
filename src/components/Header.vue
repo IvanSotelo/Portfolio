@@ -18,7 +18,7 @@ header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
 <script>
 import Link from '@/components/Link'
 import Logo from '@/components/Logo'
-import { TimelineMax, Expo } from 'gsap'
+import { TimelineMax, Power2 } from 'gsap'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -51,14 +51,14 @@ export default {
           t.to(e, 0.4, {
             x: '100%',
             delay: 0.1 * i,
-            ease: Expo.easeInOut
+            ease: Power2.easeInOut
           })
           t.set(e, {
             x: '-100%'
           })
           t.to(e, 0.4, {
             x: '0%',
-            ease: Expo.easeOut
+            ease: Power2.easeOut
           })
         })
       }
