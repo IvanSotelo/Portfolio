@@ -24,22 +24,11 @@
 </template>
 
 <script>
-import * as THREE from 'three'
-import gsap from 'gsap'
+import { gsap, TweenLite, Power2, DrawSVGPlugin } from 'gsap/all'
 import Slider from '@/webgl/Slider'
 import Gl from '@/webgl/Gl'
 
-const store = {
-  ww: window.innerWidth,
-  wh: window.innerHeight,
-  isDevice: navigator.userAgent.match(/Android/i) ||
-    navigator.userAgent.match(/webOS/i) ||
-    navigator.userAgent.match(/iPhone/i) ||
-    navigator.userAgent.match(/iPad/i) ||
-    navigator.userAgent.match(/iPod/i) ||
-    navigator.userAgent.match(/BlackBerry/i) ||
-    navigator.userAgent.match(/Windows Phone/i)
-}
+gsap.registerPlugin(DrawSVGPlugin)
 
 export default {
   name: 'Home',
@@ -52,43 +41,12 @@ export default {
     camera: null
   }),
   methods: {
-    init () {
-      this.scene = new THREE.Scene()
-      this.camera = new THREE.OrthographicCamera(
-        store.ww / -2,
-        store.ww / 2,
-        store.wh / 2,
-        store.wh / -2,
-        1,
-        10
-      )
-
-      const div = document.querySelector('.site-footer')
-
-      this.camera.lookAt(this.scene.position)
-      this.camera.position.z = 1
-
-      this.renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true
+    onResize () {
+      const t = 100 / this.$el.querySelectorAll('.js-slide').length
+      TweenLite.to(document.querySelector('.progress-f'), 1, {
+        drawSVG: '0% ' + t + '%',
+        ease: Power2.easeInOut
       })
-      this.renderer.setPixelRatio(1.5)
-      this.renderer.setSize(store.ww, store.wh)
-      this.renderer.setClearColor(0xffffff, 0)
-      const domEl = this.renderer.domElement
-      domEl.classList.add('dom-gl')
-      div.appendChild(domEl)
-
-      const geometry = new THREE.BoxGeometry(1, 1, 1)
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-      this.cube = new THREE.Mesh(geometry, material)
-      this.scene.add(this.cube)
-
-      // const render = () => {}
-    },
-    render () {
-      requestAnimationFrame(this.render)
-      this.renderer.render(this.scene, this.camera)
     }
   },
   mounted () {
@@ -101,6 +59,7 @@ export default {
     }
 
     gsap.ticker.add(tick)
+    this.onResize()
   }
 }
 </script>
