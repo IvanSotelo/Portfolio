@@ -30,7 +30,7 @@ export default class Slider {
     this.ui = {
       items: this.el.querySelectorAll('.js-slide'),
       titles: document.querySelectorAll('.js-title'),
-      lines: document.querySelectorAll('.js-progress-line')
+      progress: document.querySelectorAll('.progress-svg')[0]
     }
 
     this.state = {
@@ -124,22 +124,15 @@ export default class Slider {
         ease: 'linear'
       }
     })
-      .fromTo('.js-progress-line-2', {
-        scaleX: 1
-      }, {
-        scaleX: 0,
-        duration: 0.5,
-        ease: 'power3'
-      }, 0)
       .fromTo('.js-titles', {
         yPercent: 0
       }, {
         yPercent: -(100 - (100 / titles.length))
       }, 0)
-      .fromTo('.js-progress-line', {
-        scaleX: 0
+      .fromTo('.progress-svg', {
+        rotation: 0
       }, {
-        scaleX: 1
+        rotation: 360
       }, 0)
 
     // Cache stuff
