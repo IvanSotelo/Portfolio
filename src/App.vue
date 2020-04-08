@@ -1,6 +1,7 @@
 <template lang="pug">
   #app(v-bind:class="[isLoading ? 'is-loading' : 'is-loaded' , routeName]")
     Header
+    app-cursor(v-if="!isMobile")
     Loader(v-if="isLoading")
     router-view(v-else)
     .site-footer.ui-splash-in
@@ -9,16 +10,18 @@
 <script>
 import Loader from '@/components/Loader'
 import Header from '@/components/Header'
+import AppCursor from '@/components/AppCursor'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   components: {
     Loader,
-    Header
+    Header,
+    AppCursor
   },
   computed: {
-    ...mapGetters(['isLoading']),
+    ...mapGetters(['isMobile', 'isLoading']),
     routeName () {
       return `is-${this.$route.name}`
     }
