@@ -1,26 +1,44 @@
 <template lang="pug">
 .ui-splash-in
   .slider.js-drag-area
-    .slider__inner.js-slider
+    .slider__inner.js-slider(data-drag)
       .slide.js-slide
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex1.jpg" alt="" crossorigin="anonymous" draggable="false")
+          img.js-slide__img(src="@/assets/notiregion.png" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 120%;")
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg" alt="" crossorigin="anonymous" draggable="false")
+          img.js-slide__img(src="@/assets/cobach.jpg" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 240%;")
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="https://media0.giphy.com/media/UWcK2icE2jDtXj3AQs/giphy.gif?cid=ecf05e47c4d2a0ed73d38814532298fef1735caf78245541&rid=giphy.gif" alt="" crossorigin="anonymous" draggable="false")
+          img.js-slide__img(src="@/assets/gateway.png" alt="" crossorigin="anonymous" draggable="false")
+      .slide.js-slide(style="left: 360%;")
+        .slide__inner.js-slide__inner
+          img.js-slide__img(src="@/assets/ferlann.png" alt="" crossorigin="anonymous" draggable="false")
+      .slide.js-slide(style="left: 480%;")
+        .slide__inner.js-slide__inner
+          img.js-slide__img(src="@/assets/tex1.jpg" alt="" crossorigin="anonymous" draggable="false")
+      .slide.js-slide(style="left: 600%;")
+        .slide__inner.js-slide__inner
+          img.js-slide__img(src="@/assets/tex2.jpg" alt="" crossorigin="anonymous" draggable="false")
+      .slide.js-slide(style="left: 720%;")
+        .slide__inner.js-slide__inner
+          img.js-slide__img(src="@/assets/tex1.jpg" alt="" crossorigin="anonymous" draggable="false")
+      .slide.js-slide(style="left: 840%;")
+        .slide__inner.js-slide__inner
+          img.js-slide__img(src="@/assets/gateway.png" alt="" crossorigin="anonymous" draggable="false")
 
   .titles
-    .titles__title.titles__title--proxy Lorem ipsum
+    .titles__title.titles__title--proxy Notiregion123
     .titles__list.js-titles
-      .titles__title.js-title Ivan Sotelo
-      .titles__title.js-title Juan Sotelo
-      .titles__title.js-title knknlm
-  .progress
-    .progress__line.js-progress-line
-    .progress__line.js-progress-line-2
+      .titles__title.js-title Notiregion
+      .titles__title.js-title Cobach app
+      .titles__title.js-title Gran Logia
+      .titles__title.js-title Ferlann web
+      .titles__title.js-title Mrt Mineria
+      .titles__title.js-title Expert app
+      .titles__title.js-title Notiregion1
+      .titles__title.js-title Gateway
+      .titles__title.js-title Notiregion
 </template>
 
 <script>
@@ -67,10 +85,11 @@ export default {
 <style lang="scss" scoped>
 .slider{
   position: fixed;
-  padding: 0 22.5vw;
+  padding: 0 27.5vw;
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
   user-select: none;
   z-index: 2;
 
@@ -134,37 +153,13 @@ export default {
     align-items: center;
     justify-content: center;
     font-size: 6vw;
+    line-height: 1.15;
     font-weight: bold;
     letter-spacing: -0.1vw;
     color: #fff;
 
     &--proxy{
       visibility: hidden;
-    }
-  }
-}
-
-.progress{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0.25rem;
-  overflow: hidden;
-  pointer-events: none;
-
-  &__line{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scaleX(0);
-    transform-origin: left;
-    background-color: #fff;
-
-    &:nth-child(2) {
-      transform-origin: right;
     }
   }
 }

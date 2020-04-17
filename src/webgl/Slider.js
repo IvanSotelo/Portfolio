@@ -163,8 +163,8 @@ export default class Slider {
         left,
         right,
         width,
-        min: left < ww ? (ww * 0.775) : -(ww * 0.225 - wrapWidth * 0.2),
-        max: left > ww ? state.max - (ww * 0.775) : state.max + (ww * 0.225 - wrapWidth * 0.2),
+        min: left < ww ? (ww * 0.725) : -(ww * 0.275 - wrapWidth * 0.2),
+        max: left > ww ? state.max - (ww * 0.725) : state.max + (ww * 0.275 - wrapWidth * 0.2),
         tl,
         out: false
       })
@@ -172,11 +172,14 @@ export default class Slider {
   }
 
   calc () {
+    const {
+      width: wrapWidth
+    } = this.el.getBoundingClientRect()
     const state = this.state
     state.current += (state.target - state.current) * this.opts.ease
     state.currentRounded = Math.round(state.current * 100) / 100
     state.diff = (state.target - state.current) * 0.0005
-    state.progress = gsap.utils.wrap(0, 1, state.currentRounded / state.max)
+    state.progress = gsap.utils.wrap(0, 1, state.currentRounded / (state.max - (wrapWidth * 1.2)))
 
     this.tl && this.tl.progress(state.progress)
   }
