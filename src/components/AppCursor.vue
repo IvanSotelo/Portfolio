@@ -1,5 +1,5 @@
 <template lang="pug">
-.cursor(v-bind:class="[mouseClick ? 'click' : '' , mouseDrag ? 'drag' : '', mouseZoom ? 'zoom' : '', mouseImgDrag ? 'img-drag' : '']")
+.cursor(v-bind:class="[mouseClick ? 'click' : '' , mouseDrag ? 'drag' : '', mouseLink ? 'link' : '', mouseZoom ? 'zoom' : '', mouseImgDrag ? 'img-drag' : '']")
   .circle-indicator
     .circle
   .indicator
@@ -18,11 +18,16 @@
 </template>
 
 <script>
+import { TweenMax } from 'gsap'
+import { getOffset } from '@/utils/dom'
+
 export default {
   name: 'AppCursor',
   data: () => ({
     DOM: {},
     bounds: {},
+    magnet: null,
+    focus: null,
     scale: 1,
     opacity: 1,
     winsize: {
@@ -49,6 +54,7 @@ export default {
     },
     lastScale: 1,
     lastOpacity: 1,
+    mouseLink: false,
     mouseClick: false,
     mouseDrag: false,
     mouseZoom: false,
@@ -66,23 +72,29 @@ export default {
   },
   methods: {
     initEvents () {
-      // // Custom cursor chnages state when hovering on elements with 'data-hover'.
-      // [...document.querySelectorAll('[data-hover]')].forEach((link) => {
-      //   const title = link.dataset.title ? link.dataset.title : ''
-      //   // Show the title next to the cursor.
-      //   link.addEventListener('mouseenter', () => this.setTitle(title))
-      //   link.addEventListener('mouseleave', () => this.setTitle(''))
-      //   link.addEventListener('mouseenter', () => this.enter())
-      //   link.addEventListener('mouseleave', () => this.leave())
-      //   link.addEventListener('click', () => this.click())
-      // })
+      // Custom cursor chnages state when hovering on elements with 'data-hover'.
+      [...document.querySelectorAll('[data-link]')].forEach((link) => {
+        // const title = link.dataset.title ? link.dataset.title : ''
+        // // Show the title next to the cursor.
+        // link.addEventListener('mouseenter', () => this.setTitle(title))
+        // link.addEventListener('mouseleave', () => this.setTitle(''))
+        link.addEventListener('mouseenter', ev => this.enterLink(ev))
+        link.addEventListener('mousemove', ev => this.moveLink(ev))
+        link.addEventListener('mouseleave', ev => this.leaveLink(ev))
+      })
       window.addEventListener('resize', () => {
         this.winsize.width = window.innerWidth
         this.winsize.height = window.innerHeight
       })
-      window.addEventListener('mousedown', () => this.click())
-      window.addEventListener('mouseup', () => this.leave())
+      window.addEventListener('mousedown', ev => this.click(ev))
+      window.addEventListener('mouseup', ev => this.leave(ev))
       window.addEventListener('mousemove', ev => { this.mousePos = this.getMousePos(ev) })
+    },
+    dragEvents () {
+      [...document.querySelectorAll('[data-drag]')].forEach((link) => {
+        link.addEventListener('mouseenter', ev => this.enterDrag(ev))
+        link.addEventListener('mouseleave', ev => this.leaveDrag(ev))
+      })
     },
     lerp (a, b, n) {
       return (1 - n) * a + n * b
@@ -115,8 +127,50 @@ export default {
       // Sets the title content
       this.DOM.title.innerHTML = title
     },
-    enter () {
-      this.scale = 2.7
+    enterLink (event) {
+      event.preventDefault()
+      this.mouseLink = true
+      this.focus = event.target.querySelector('[data-link-arrow]')
+      this.magnet = event.target.querySelector('[data-link-magnet]')
+    },
+    leaveLink () {
+      event.preventDefault()
+      this.mouseLink = false
+      if (this.magnet) {
+        TweenMax.to(this.magnet, 0.3, {
+          x: 0,
+          y: 0
+        })
+
+        this.magnet = null
+      }
+    },
+    moveLink (event) {
+      event.preventDefault()
+      if (this.magnet) {
+        const magnetHeight = this.magnet.clientHeight - 2
+        const magnetWidth = this.magnet.clientWidth
+
+        const { left, top } = getOffset(event.target)
+
+        const dx = (event.clientX - left) / magnetWidth - 0.5
+        const dy = (event.clientY - top) / magnetHeight - 0.5
+
+        TweenMax.to(this.magnet, 0.3, {
+          x: dx * magnetWidth * 0.7,
+          y: dy * magnetHeight * 0.7
+        })
+      }
+    },
+    enterDrag (event) {
+      event.stopPropagation()
+      if (event.target.tagName === 'A' || event.target.tagName === 'BUTTON') {
+        return event.preventDefault()
+      }
+      this.mouseDrag = true
+    },
+    leaveDrag () {
+      this.mouseDrag = false
     },
     leave () {
       this.mouseClick = false
@@ -136,6 +190,7 @@ export default {
     left: 0;
     z-index: 9999;
     pointer-events: none;
+    mix-blend-mode: difference;
     .circle-indicator,.indicator {
       position: relative;
       transform: translate3d(0,0,0) scale(1);
