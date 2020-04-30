@@ -25,7 +25,8 @@ export default {
   },
   data: () => ({
     images: [
-      ''
+      './assets/tex1.jpg',
+      './assets/tex2.jpg'
     ]
   }),
   computed: {

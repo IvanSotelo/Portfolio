@@ -26,6 +26,7 @@ export default {
   height: 8.5vh;
   left: calc(8.5vh - 10px);
   bottom: calc(8.5vh - 10px);
+  z-index: 2;
   .in {
     z-index: 5;
   }

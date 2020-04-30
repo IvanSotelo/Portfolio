@@ -2,8 +2,8 @@
 header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
   .logo-wrap(data-link)
     Link.ui-splash-in(text="Ivan Sotelo")
-  router-link.ui-splash-in.logo-icon(to="/")
-    .in
+  router-link.ui-splash-in.logo-icon(to="/" data-link )
+    .in(data-link-magnet)
       Logo.logo(iheight="30px")
   .ui-toggle.js--hover.side.no-events.ui-splash-in(@mouseover="onToggleEnter" @click="toggleMenu" data-link)
     .ui-toggle-in
@@ -87,11 +87,11 @@ header {
   pointer-events: all;
   -webkit-transform: translate(0);
   transform: translate(0);
-  width: 17vh;
+  width: 10vh;
   height: 17vh;
   top: 0;
   left: 50%;
-  margin-left: -8.5vh;
+  margin-left: -5.5vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -191,6 +191,7 @@ header {
 }
 .in {
     position: relative;
+    pointer-events: none;
     width: 100%;
     height: 100%;
 }
