@@ -13,6 +13,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@johh/three-effectcomposer": "0.0.7",
     "core-js": "^3.6.4",
     "gsap": "^3.2.6",
     "image-preloader": "^1.1.1",
