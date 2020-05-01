@@ -1,14 +1,16 @@
 <template lang="pug">
-  #app(v-bind:class="[isLoading ? 'is-loading' : 'is-loaded' , routeName]")
+  #app(v-bind:class="[isLoading ? 'is-loading' : 'is-loaded', menuOpen ? 'js--menu-open-enter' : '' , menuLeave ? 'js--menu-open-leave' : '' , routeName]")
     Header
+    SiteNav
     app-cursor(v-if="!isMobile")
     Loader(v-if="isLoading")
-    router-view(v-else)
+    router-view.site-content(v-else)
     Footer
 </template>
 
 <script>
 import Loader from '@/components/Loader'
+import SiteNav from '@/components/SiteNav'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import AppCursor from '@/components/AppCursor'
@@ -20,10 +22,11 @@ export default {
     Loader,
     Header,
     Footer,
-    AppCursor
+    AppCursor,
+    SiteNav
   },
   computed: {
-    ...mapGetters(['isMobile', 'isLoading']),
+    ...mapGetters(['isMobile', 'isLoading', 'menuOpen', 'menuLeave']),
     routeName () {
       return `is-${this.$route.name}`
     }
@@ -121,4 +124,53 @@ body {
 
     border-bottom: .1rem solid;
 }
+
+.js--menu-open-enter .clip-t,
+.js--menu-open-enter .dom-gl,
+.js--menu-open-enter .page-content,
+.js--menu-open-enter .page-header,
+.js--menu-open-enter .site-content,
+.js--menu-open-enter .ui-fade-out,
+.js--menu-open-enter .ui-splash-in,
+.js--menu-open-enter .ui-toggle .t {
+    -webkit-transition: all .82s cubic-bezier(.44, .15, .2, 1)!important;
+    transition: all .82s cubic-bezier(.44, .15, .2, 1)!important
+}
+
+.js--menu-open-enter .dom-gl,
+.js--menu-open-enter .site-content,
+.js--menu-open-enter .ui-fade-out {
+    opacity: 0!important
+}
+
+.js--menu-open-leave {
+    overflow: hidden!important
+}
+
+.js--menu-open-leave .clip-t,
+.js--menu-open-leave .page-content,
+.js--menu-open-leave .page-header,
+.js--menu-open-leave .ui-fade-out,
+.js--menu-open-leave .ui-toggle .t {
+    -webkit-transition: all .72s cubic-bezier(.55, .23, .18, 1.01);
+    transition: all .72s cubic-bezier(.55, .23, .18, 1.01)
+}
+
+.js--menu-open-leave .dom-gl,
+.js--menu-open-leave .site-content {
+    -webkit-transition: all .82s cubic-bezier(.55, .23, .18, 1.01);
+    transition: all .82s cubic-bezier(.55, .23, .18, 1.01)
+}
+
+.js--menu-open-leave .clip-t,
+.js--menu-open-leave .ui-toggle-a .b {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%)
+}
+
+.js--menu-open-leave .ui-toggle-a .b {
+    -webkit-transition: all .82s cubic-bezier(.55, .23, .18, 1.01);
+    transition: all .82s cubic-bezier(.55, .23, .18, 1.01)
+}
+
 </style>

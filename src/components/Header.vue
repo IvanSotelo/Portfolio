@@ -1,5 +1,5 @@
 <template lang="pug">
-header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
+header
   .logo-wrap(data-link)
     Link.ui-splash-in(text="Ivan Sotelo")
   router-link.ui-splash-in.logo-icon(to="/" data-link )
@@ -19,7 +19,7 @@ header(v-bind:class="[menuOpen ? 'js--menu-open-enter' : '']")
 import Link from '@/components/Link'
 import Logo from '@/components/Logo'
 import { TimelineMax, Power2 } from 'gsap'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Header',
@@ -30,11 +30,6 @@ export default {
   data: () => ({
     mouseHover: false
   }),
-  computed: {
-    ...mapGetters([
-      'menuOpen'
-    ])
-  },
   methods: {
     ...mapActions([
       'toggleMenu'
@@ -191,7 +186,6 @@ header {
 }
 .in {
     position: relative;
-    pointer-events: none;
     width: 100%;
     height: 100%;
 }

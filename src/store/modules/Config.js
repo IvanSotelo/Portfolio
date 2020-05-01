@@ -12,6 +12,7 @@ const state = {
     navigator.userAgent.match(/BlackBerry/i) ||
     navigator.userAgent.match(/Windows Phone/i),
   menuOpen: false,
+  menuLeave: false,
   language: Vue.localStorage.get('language', 'es'),
   audio: Vue.localStorage.get('audio')
 }
@@ -21,7 +22,11 @@ const mutations = {
     state.isMobile = mobile
   },
   TOGGLE_MENU (state) {
+    state.menuLeave = state.menuOpen && false
     state.menuOpen = !state.menuOpen
+  },
+  TOGGLE_MENU_LEAVE (state, leave) {
+    state.menuLeave = leave
   },
   SET_LANGUAGE (state) {
     if (state.language === 'es') {
@@ -56,6 +61,9 @@ const actions = {
   toggleMenu ({ commit }) {
     commit('TOGGLE_MENU')
   },
+  toggleMenuLeave ({ commit }, leave) {
+    commit('TOGGLE_MENU_LEAVE', leave)
+  },
   setLanguage ({ commit }) {
     commit('SET_LANGUAGE')
   },
@@ -68,6 +76,7 @@ const getters = {
   isMobile: state => state.isMobile,
   isDevice: state => state.isDevice,
   menuOpen: state => state.menuOpen,
+  menuLeave: state => state.menuLeave,
   language: state => state.language,
   audio: state => state.audio
 }
