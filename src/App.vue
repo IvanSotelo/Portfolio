@@ -3,8 +3,9 @@
     Header
     SiteNav
     app-cursor(v-if="!isMobile")
-    Loader(v-if="isLoading")
-    router-view.site-content(v-else)
+    .site-content
+      Loader(v-if="isLoading")
+      router-view(v-else)
     Footer
 </template>
 
@@ -125,11 +126,22 @@ body {
     border-bottom: .1rem solid;
 }
 
+.site-body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    transform: translate(0);
+}
+
 .js--menu-open-enter .clip-t,
 .js--menu-open-enter .dom-gl,
 .js--menu-open-enter .page-content,
 .js--menu-open-enter .page-header,
-.js--menu-open-enter .site-content,
+.js--menu-open-enter .site-body,
 .js--menu-open-enter .ui-fade-out,
 .js--menu-open-enter .ui-splash-in,
 .js--menu-open-enter .ui-toggle .t {
@@ -138,7 +150,7 @@ body {
 }
 
 .js--menu-open-enter .dom-gl,
-.js--menu-open-enter .site-content,
+.js--menu-open-enter .site-body,
 .js--menu-open-enter .ui-fade-out {
     opacity: 0!important
 }
@@ -157,7 +169,7 @@ body {
 }
 
 .js--menu-open-leave .dom-gl,
-.js--menu-open-leave .site-content {
+.js--menu-open-leave .site-body {
     -webkit-transition: all .82s cubic-bezier(.55, .23, .18, 1.01);
     transition: all .82s cubic-bezier(.55, .23, .18, 1.01)
 }

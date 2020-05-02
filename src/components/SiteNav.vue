@@ -29,8 +29,12 @@
                     span.s CONTACT
                   span.b.gs2
                     span.s CONTACT
-    small.site-cop
+    small.site-copy
+      span © 2019 Ivan Sotelo.
     .site-nav-footer
+      .site-nav-sns
+        ul
+          li.clip-w.clip-p
 </template>
 
 <script>
@@ -223,6 +227,13 @@ export default {
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end
+}
+
+.site-copy {
+  right: calc(8.5vh - 10px);
+  bottom: calc(8.5vh - 10px);
+  font-weight: 300;
+  color: #8c8c8c;
 }
 
 .site-copy,
