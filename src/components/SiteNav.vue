@@ -30,7 +30,7 @@
                   span.b.gs2
                     span.s CONTACT
     small.site-copy
-      span © 2019 Ivan Sotelo.
+      span © 2020 Ivan Sotelo.
     .site-nav-footer
       .site-nav-sns
         ul
@@ -88,7 +88,6 @@ export default {
     onToggleLeave (ev) {
       var f = ev.target.querySelector('.site-nav-a') ? ev.target.querySelectorAll('.site-nav-a')[0] : ev.target
       if (!f.classList.contains('router-link-exact-active')) {
-        console.log('enteo')
         f.classList.remove('_hover')
         var t = ev.target.querySelectorAll('.t')
         TweenLite.set(t, {

@@ -3,7 +3,7 @@
     Header
     SiteNav
     app-cursor(v-if="!isMobile")
-    .site-content
+    main.site-content
       Loader(v-if="isLoading")
       router-view(v-else)
     Footer

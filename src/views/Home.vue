@@ -1,5 +1,5 @@
 <template lang="pug">
-.ui-splash-in
+.site-body
   .slider.js-drag-area
     .slider__inner.js-slider(data-drag)
       .slide.js-slide
@@ -7,10 +7,10 @@
           img.js-slide__img(src="@/assets/notiregion.png" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 120%;")
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="@/assets/cobach.jpg" alt="" crossorigin="anonymous" draggable="false")
+          img.js-slide__img(src="@/assets/cobach.png" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 240%;")
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="@/assets/gateway.png" alt="" crossorigin="anonymous" draggable="false")
+          img.js-slide__img(src="@/assets/perseverancia.png" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 360%;")
         .slide__inner.js-slide__inner
           img.js-slide__img(src="@/assets/ferlann.png" alt="" crossorigin="anonymous" draggable="false")
@@ -22,27 +22,24 @@
           img.js-slide__img(src="@/assets/tex2.jpg" alt="" crossorigin="anonymous" draggable="false")
       .slide.js-slide(style="left: 720%;")
         .slide__inner.js-slide__inner
-          img.js-slide__img(src="@/assets/tex1.jpg" alt="" crossorigin="anonymous" draggable="false")
-      .slide.js-slide(style="left: 840%;")
-        .slide__inner.js-slide__inner
           img.js-slide__img(src="@/assets/gateway.png" alt="" crossorigin="anonymous" draggable="false")
 
   .titles
-    .titles__title.titles__title--proxy Notiregion123
+    .titles__title.titles__title--proxy Perseverancia
     .titles__list.js-titles
       .titles__title.js-title Notiregion
-      .titles__title.js-title Cobach app
-      .titles__title.js-title Gran Logia
-      .titles__title.js-title Ferlann web
+      .titles__title.js-title Cobach
+      .titles__title.js-title Perseverancia
+      .titles__title.js-title Ferlann
       .titles__title.js-title Mrt Mineria
       .titles__title.js-title Expert app
-      .titles__title.js-title Notiregion1
       .titles__title.js-title Gateway
       .titles__title.js-title Notiregion
 </template>
 
 <script>
 import { gsap, TweenLite, Power2, DrawSVGPlugin } from 'gsap/all'
+import { mapGetters } from 'vuex'
 import Slider from '@/webgl/Slider'
 import Gl from '@/webgl/Gl'
 
@@ -58,6 +55,9 @@ export default {
     scene: null,
     camera: null
   }),
+  computed: {
+    ...mapGetters(['menuOpen'])
+  },
   methods: {
     onResize () {
       const t = 100 / this.$el.querySelectorAll('.js-slide').length
@@ -78,6 +78,11 @@ export default {
 
     gsap.ticker.add(tick)
     this.onResize()
+  },
+  watch: {
+    menuOpen (menuOpen) {
+      menuOpen ? this.slider.off() : this.slider.on()
+    }
   }
 }
 </script>
